@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design Parity Audit"
+  short_description: "Audit dev UI against Figma designs visually"
+  default_prompt: "Use $design-parity-audit to compare this development URL with my Figma design and generate an annotated visual parity report."
+policy:
+  allow_implicit_invocation: true
