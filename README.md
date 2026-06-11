@@ -83,6 +83,52 @@ Figma：筛选组 x=280 y=104 w=1128 h=62，4 个控件槽位，每个约 239×6
 - 标在开发稿上的编号问题
 - 每个问题对应的 Figma 参数、开发参数和具体修改方式
 
+### 假案例：Construction Estimates Dashboard
+
+下面这个示例用一张后台 Dashboard 设计稿演示这个 skill 适合怎样的走查场景。
+
+![Construction Estimates Dashboard design](assets/example-construction-estimates.svg)
+
+示例走查结果会像这样：左侧是设计稿，右侧是开发稿，问题直接标在开发稿上，下方给出还原度和具体修改建议。
+
+![Design parity audit result example](assets/example-design-parity-result.svg)
+
+你可以把需求写成这样：
+
+```text
+用 design-parity-audit 做一下这个功能模块的设计走查：
+
+开发地址：https://demo.example.com/construction/estimates
+Figma：https://www.figma.com/design/demo/construction-service?node-id=100-200&m=dev
+模块范围：Construction Estimates Dashboard
+```
+
+这个案例会重点检查：
+
+| 区域 | 走查重点 | 示例问题 |
+| --- | --- | --- |
+| 左侧导航 | Logo、菜单层级、选中态、搜索框、用户信息区 | 侧栏宽度偏窄、选中态颜色不一致 |
+| 顶部工具栏 | 标题、Tutorial Video、排序、筛选、Add Estimate 按钮 | 按钮高度、圆角、主色和右边距偏差 |
+| 数据概览卡片 | Total Estimates / Change Orders 的卡片尺寸、间距、状态颜色 | 卡片间距过大、状态标签颜色不准 |
+| 搜索和筛选区 | Search estimate、Status、Date Range、List/Grid 切换 | 控件高度不一致、筛选组没有对齐 |
+| Estimate 卡片列表 | 三列栅格、卡片边框色、状态标签、金额字号、条目行高 | 卡片宽度不均、内容密度过松、状态色错误 |
+
+报告里的问题会写成这种形式：
+
+```text
+问题 3：Estimate 卡片栅格和卡片密度偏差
+
+Figma：内容区为 3 列卡片栅格，卡片间距约 16px，卡片圆角约 10px，
+Accepted / Pending / Overdue 使用不同左侧状态色。
+
+开发：卡片列宽被拉伸到 360px 以上，卡片内金额字号偏小，列表行高偏松，
+状态色只用了单一蓝绿色。
+
+怎么改：内容容器使用 grid-template-columns: repeat(3, minmax(0, 1fr))；
+列间距设为 16px；卡片 padding 设为 16px；金额字号设为 18px/24px；
+状态色分别映射 accepted=#1EA672、pending=#F5A623、overdue=#F05252。
+```
+
 Codex 会执行这些步骤：
 
 1. 打开开发页面，确认不是登录页或错误页
